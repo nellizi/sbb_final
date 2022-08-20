@@ -82,4 +82,24 @@ public class MainController {
                 .mapToObj(i->"%d*%d=%d".formatted(finalDan,i,finalDan*i))
                 .collect(Collectors.joining("<br>"));
     }
+
+    @GetMapping("/mbti/{name}")
+    @ResponseBody
+    public String showMbti(@PathVariable String name){
+        String rs = switch (name){
+            case "홍길동" -> "INFT";
+            case "홍길순" -> "INFJ";
+            case "임꺽정" -> "ENFJ";
+            case "이지현","제제" -> "ENFP";
+            default -> "CUTE";
+        };
+    return rs;
+    }
+//    return switch(name){
+//        case "홍길동" -> "INFT";
+//        case "홍길순" -> "INFJ";
+//        case "임꺽정" -> "ENFJ";
+//        case "이지현","제제" -> "ENFP";
+//        default -> "CUTE";
+//    };         이렇게 바로 리턴 뒤에 작성하는것도 가능
 }
