@@ -3,6 +3,9 @@ package com.ll.exam.sbbfinal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 @Controller
 public class MainController {
 
@@ -53,10 +56,18 @@ public class MainController {
     return a+b;
     }
 
-    @GetMapping("/increase")
+    @GetMapping("/gugudan")
     @ResponseBody
-    public int increase(){
-        i++;
-        return i ;
+    public String showGugudan(Integer dan, Integer limit){
+        if(limit == null){
+            limit = 9;
+        }
+        if(dan == null){
+            dan = 9;
+        }
+        Integer finalDan=dan;
+        return IntStream.rangeClosed(1,limit)
+                .mapToObj(i->"%d*%d=%d".formatted(finalDan,i,finalDan*i))
+                .collect(Collectors.joining("<br>"));
     }
 }
