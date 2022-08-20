@@ -146,7 +146,7 @@ public class MainController {
                 .stream()
                 .filter(a -> a.getId() == id)
                 .findFirst()
-                .get();
+                .orElse(null);
 
         return article;
     }
@@ -157,7 +157,7 @@ public class MainController {
                 .stream()
                 .filter(a -> a.getId() == id)
                 .findFirst()
-                .get();
+                .orElse(null);
 
         if (article == null){
             return "%d번 article은 존재하지 않습니다.".formatted(id);
@@ -167,18 +167,58 @@ public class MainController {
 
         return "%d번 article을 수정하였습니다.".formatted(id);
     }
+    @GetMapping("/deleteArticle/{id}")
+    @ResponseBody
+    public String deleteArticle(@PathVariable int id) {
+        Article article = articles
+                .stream()
+                .filter(a -> a.getId() == id)
+                .findFirst()
+                .orElse(null);
 
+        if (article == null){
+            return "%d번 article은 존재하지 않습니다.".formatted(id);
+        }
+        articles.remove(article);
+
+        return "%d번 article을 삭제하였습니다.".formatted(id);
+    }
+    @GetMapping("/addPerson")
+    @ResponseBody
+    public Person addperson(int id, int age, String name) {
+        Person person = new Person(id,age,name);
+        return person;
+
+    }
+    @GetMapping("/addPerson2")
+    @ResponseBody
+    public Person addpersonNew(Person person) {
+
+        return person;
+
+    }
 }
+
+
 @Getter
 @Setter
 @AllArgsConstructor
  class Article {
     private static int LastId = 0;
-    private  int id;
+    private int id;
     private String title;
     private String body;
 
     public Article(String title, String body) {
-    this(++LastId,title,body);
+        this(++LastId, title, body);
     }
+
+}
+@AllArgsConstructor
+@Getter
+class Person{
+    private int id;
+    private int age;
+    private String name;
+
 }
