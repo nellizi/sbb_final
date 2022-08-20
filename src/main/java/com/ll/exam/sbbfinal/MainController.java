@@ -192,7 +192,8 @@ public class MainController {
     }
     @GetMapping("/addPerson2")
     @ResponseBody
-    public Person addpersonNew(Person person) {
+    public Person addpersonNew(Person person)
+    {
 
         return person;
 
