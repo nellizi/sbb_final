@@ -3,6 +3,8 @@ package com.ll.exam.sbbfinal;
 import com.sun.xml.bind.v2.schemagen.xmlschema.NestedParticle;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.convert.ThreeTenBackPortConverters;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.stylesheets.LinkStyle;
@@ -148,12 +150,31 @@ public class MainController {
 
         return article;
     }
+    @GetMapping("/modifyArticle/{id}")
+    @ResponseBody
+    public String getArticle(@PathVariable int id, String title, String body) {
+        Article article = articles
+                .stream()
+                .filter(a -> a.getId() == id)
+                .findFirst()
+                .get();
+
+        if (article == null){
+            return "%d번 article은 존재하지 않습니다.".formatted(id);
+        }
+        article.setTitle(title);
+        article.setBody(body);
+
+        return "%d번 article을 수정하였습니다.".formatted(id);
+    }
+
 }
 @Getter
+@Setter
 @AllArgsConstructor
  class Article {
     private static int LastId = 0;
-    private final int id;
+    private  int id;
     private String title;
     private String body;
 
