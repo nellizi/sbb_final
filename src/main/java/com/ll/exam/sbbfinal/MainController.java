@@ -3,6 +3,9 @@ package com.ll.exam.sbbfinal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -54,6 +57,15 @@ public class MainController {
     @ResponseBody
     public int plus(int a, int b){
     return a+b;
+    }
+
+    @GetMapping("/plus2")
+    @ResponseBody
+    public void showPlus2(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int a = Integer.parseInt(request.getParameter("a"));
+        int b = Integer.parseInt(request.getParameter("b"));
+
+        response.getWriter().append(a+b+"");
     }
 
     @GetMapping("/gugudan")
