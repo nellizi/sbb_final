@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -74,5 +75,15 @@ public class AnswerRepositoryTests {
         Answer a = this.answerRepository.findById(1).get();
         Question question = a.getQuestion();
         assertThat(question.getId()).isEqualTo(1);
+    }
+    @Test
+    void  question으로_answer조회() {
+        Question question = questionRepository.findById(1).get();
+
+        List<Answer> answerList = question.getAnswerList();
+
+        assertThat(answerList.size()).isEqualTo(2);
+        assertThat(answerList.get(0).getContent()).isEqualTo("sbb는 질문답변 게시판 입니다.");
+
     }
 }
