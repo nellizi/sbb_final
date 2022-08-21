@@ -24,7 +24,7 @@ public class Question {
 
     private LocalDateTime createDate;
 
-    @OneToMany(mappedBy = "question" , cascade = CascadeType.REMOVE) //mappesBy : answer엔티티에 쓰인 변수명
+    @OneToMany(mappedBy = "question" , cascade = {CascadeType.REMOVE, CascadeType.PERSIST}) //mappesBy : answer엔티티에 쓰인 변수명
     private List<Answer> answerList = new ArrayList<>();  //클래스에만 존재하는 것
 
     public void addAnswer(Answer answer) {

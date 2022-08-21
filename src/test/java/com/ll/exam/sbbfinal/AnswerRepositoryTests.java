@@ -66,7 +66,7 @@ public class AnswerRepositoryTests {
         a.setContent("네 자동으로 생성됩니다.");
         a.setCreateDate(LocalDateTime.now());
         q.addAnswer(a);
-        answerRepository.save(a);
+      //  answerRepository.save(a);
     }
     @Test
     void 조회() {
