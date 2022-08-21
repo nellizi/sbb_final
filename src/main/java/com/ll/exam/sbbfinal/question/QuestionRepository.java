@@ -1,4 +1,4 @@
-package com.ll.exam.sbbfinal;
+package com.ll.exam.sbbfinal.question;
 
 import com.ll.exam.sbbfinal.base.RepositoryUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
