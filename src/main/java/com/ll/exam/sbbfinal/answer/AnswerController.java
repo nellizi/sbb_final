@@ -18,6 +18,8 @@ import java.util.List;
 @RequestMapping("/answer")
 public class AnswerController {
     private final QuestionService questionService;
+    private final AnswerService answerService;
+
 
 
 
@@ -25,7 +27,7 @@ public class AnswerController {
     @PostMapping("/create/{id}")
     public String detail(Model model, @PathVariable("id") Integer id,  String content) {
         Question question = questionService.getQuestion(id);
-
+        answerService.create(question, content);
 
       return "redirect:/question/detail/%s".formatted(id);
     }
