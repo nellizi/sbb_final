@@ -1,3 +1,11 @@
+
+@font-face {
+    font-family: 'SLEIGothicTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SLEIGothicTTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 textarea {
     width:100%;
 }
@@ -5,4 +13,8 @@ textarea {
 input[type=submit],
 button[type=submit] {
     margin-top:10px;
+}
+
+html > body{
+font-family: "SLEIGothicTTF";
 }
