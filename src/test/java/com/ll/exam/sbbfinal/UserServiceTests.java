@@ -17,5 +17,6 @@ public class UserServiceTests {
     @DisplayName("회원가입이 가능하다.")
     public void t1() {
         userService.create("user1", "user1@email.com", "1234");
+
     }
 }
