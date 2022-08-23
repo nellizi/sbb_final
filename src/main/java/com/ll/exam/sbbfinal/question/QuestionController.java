@@ -1,6 +1,7 @@
 package com.ll.exam.sbbfinal.question;
 
 
+import com.ll.exam.sbbfinal.answer.AnswerForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,17 +18,18 @@ public class QuestionController {
 
 
 
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public String list(Model model) {
         List<Question> questionList = questionService.getList();
         model.addAttribute("questionList", questionList);
         return "question_list";
     }
-    @RequestMapping("/detail/{id}")
+    @GetMapping("/detail/{id}")
 
     public String detail(Model model, @PathVariable int id) {
         Question question = questionService.getQuestion(id);
         model.addAttribute("question",question);
+        model.addAttribute("answerForm",new AnswerForm(""));
 
       return "question_detail";
     }
