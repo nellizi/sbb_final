@@ -42,7 +42,7 @@ public class AnswerRepositoryTests {
 
     private void createSampleData() {
         QuestionRepositoryTests.createSampleData(questionRepository);
-        Question q = questionRepository.findById(1).get();
+        Question q = questionRepository.findById(1L).get();
 
         Answer a1 = new Answer();
         a1.setContent("sbb는 질문답변 게시판 입니다.");
@@ -63,7 +63,7 @@ public class AnswerRepositoryTests {
     @Rollback(false)
     @Test
     void 저장() {
-        Question q = questionRepository.findById(2).get();
+        Question q = questionRepository.findById(2L).get();
 
         Answer a = new Answer();
         a.setContent("네 자동으로 생성됩니다.");
@@ -74,7 +74,7 @@ public class AnswerRepositoryTests {
     @Test
     void 조회() {
 
-        Answer a = this.answerRepository.findById(1).get();
+        Answer a = this.answerRepository.findById(1L).get();
         assertThat(a.getContent()).isEqualTo("sbb는 질문답변 게시판 입니다.");
     }
     @Test
@@ -82,7 +82,7 @@ public class AnswerRepositoryTests {
     @Rollback(false)
     void  연관_question_조회() {
 
-        Answer a = this.answerRepository.findById(1).get();
+        Answer a = this.answerRepository.findById(1L).get();
         Question question = a.getQuestion();
         assertThat(question.getId()).isEqualTo(1);
     }
@@ -90,7 +90,7 @@ public class AnswerRepositoryTests {
     @Transactional
     @Rollback(false)
     void  question으로_answer조회() {
-        Question question = questionRepository.findById(1).get();
+        Question question = questionRepository.findById(1L).get();
 
 
         List<Answer> answerList = question.getAnswerList();

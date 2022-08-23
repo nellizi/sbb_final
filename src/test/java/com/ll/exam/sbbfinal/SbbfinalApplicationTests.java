@@ -73,7 +73,7 @@ class SbbApplicationTests {
 	}
 	@Test
 	void testJpa6() {
-		Optional<Question> oq = this.questionRepository.findById(1);  //findById가 옵셔널로 설정되어 있음. 싫으면 오버라이딩 고
+		Optional<Question> oq = this.questionRepository.findById(1L);  //findById가 옵셔널로 설정되어 있음. 싫으면 오버라이딩 고
 		assertTrue(oq.isPresent());
 		Question q = oq.get();  //옵셔널로 들어오면 get으로 받기. 이게 싫으면 orElse(null) 로 받기
 		q.setSubject("수정된 제목");
