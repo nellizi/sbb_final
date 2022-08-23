@@ -7,10 +7,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @SpringBootTest
 public class QuestionRepositoryTests {
@@ -102,6 +107,15 @@ public class QuestionRepositoryTests {
     }
 
     @Test
+    void findAllPageable() {
+        // Pageble : 한 페이지에 몇개의 아이템이 나와야 하는지 + 현재 몇 페이지인지)
+        Pageable pageable = PageRequest.of(0, lastSampleDataId);
+        Page<Question> page = questionRepository.findAll(pageable);
+
+        assertThat(page.getTotalPages()).isEqualTo(1);
+    }
+
+    @Test
     void findBySubject() {
         Question q = questionRepository.findBySubject("sbb가 무엇인가요?");
         assertThat(q.getId()).isEqualTo(1);
@@ -120,5 +134,19 @@ public class QuestionRepositoryTests {
         Question q = qList.get(0);
 
         assertThat(q.getSubject()).isEqualTo("sbb가 무엇인가요?");
+    }
+    @Test
+    void createManySampleData() {
+        boolean run = false;
+
+        if (run == false) return;
+
+        IntStream.rangeClosed(3, 300).forEach(id -> {
+            Question q = new Question();
+            q.setSubject("%d번 질문".formatted(id));
+            q.setContent("%d번 질문의 내용".formatted(id));
+            q.setCreateDate(LocalDateTime.now());
+            questionRepository.save(q);
+        });
     }
 }
