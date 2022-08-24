@@ -27,6 +27,7 @@ public class QuestionController {
         // questionList 라는 이름으로 questionList 변수를 사용할 수 있다.
         model.addAttribute("paging", paging);
 
+
         return "question_list";
     }
 
@@ -53,4 +54,5 @@ public class QuestionController {
         questionService.create(questionForm.getSubject(), questionForm.getContent());
         return "redirect:/question/list"; // 질문 저장후 질문목록으로 이동
     }
+
 }
